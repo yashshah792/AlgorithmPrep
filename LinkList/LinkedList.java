@@ -1,21 +1,23 @@
-package linkedlist;
-import java.awt.HeadlessException;
-
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
-
-import org.graalvm.compiler.core.gen.NodeLIRBuilder;
-
-import linkedlist.ListNode;
-
 public class LinkedList{
-    ListNode head;
-
     public LinkedList(){
-        lenght = 0;
+        length = 0;
     }
+
+    ListNode head;
 
     private int length = 0;
     
+    // create a new linkedlist
+    public void createLinkedList(int ... data){
+        for(int i : data){
+            if(i == 0){
+                insertAtBeginning(new ListNode(i));
+            }else{
+                insertAtEnd(new ListNode(i));
+            }
+        }
+    }
+
     // get first node i.e. head
     public ListNode getHead(){
         return head;
@@ -70,8 +72,8 @@ public class LinkedList{
                 tmp = tmp.getNext();
             }
             ListNode newNode = new ListNode(data);
-            newNode.next = temp.next;
-            temp.setNext(newNode);
+            newNode.next = tmp.next;
+            tmp.setNext(newNode);
         }
         length++;
     }
@@ -106,7 +108,7 @@ public class LinkedList{
             return tmp;
         }
         ListNode x = head, y = null, next = head.getNext();
-        while((next = p.getNext()) != null){
+        while((next = x.getNext()) != null){
             y = x;
             y = next;
         }
@@ -129,5 +131,20 @@ public class LinkedList{
             temp.setNext(temp.getNext().getNext());
         }
         length--;
+    }
+
+    // Print linked list
+    public String linkedListToString(){
+        String result = "[";
+        if(head == null){
+            return result + "]";
+        }
+        result = result + head.getData();
+        ListNode temp = head.getNext();
+        while(temp != null){
+            result = result + "," + temp.getData();
+            temp = temp.getNext();
+        }
+        return result + "]";
     }
 }
