@@ -44,11 +44,12 @@ public class LinkedList{
             head = node;
         }
         else{
-            ListNode current, end;
-            for(current = head; (end = current.getNext()) != null ; current = end){
-                current.setNext(node);
-                length++;
+            ListNode current = head;
+            while(current.next != null){
+                current = current.next;
             }
+            current.next = node;
+            length++;
         }
     }
 
